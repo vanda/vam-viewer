@@ -45,18 +45,12 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
         qParam.slide &&
         Array.isArray(qParam.slide)
       ) {
-
-        console.log('hello')
-
         const indexOfQueryId = qParam.slideshow.find(query => parseInt(query) === id);
         if (indexOfQueryId) {
           qParam.slide[parseInt(indexOfQueryId)] = currentIndex + '';
           document.location.hash = queryString.stringify(qParam);
         }
       } else {
-
-        console.log('but mno')
-
         if (typeof qParam.slideshow === 'string' && parseInt(qParam.slideshow) !== id) {
           document.location.hash =
             document.location.hash + `&${buildId(currentIndex)}`;
@@ -96,8 +90,8 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
 
   useEffect(() => {
     if (addressable && hash) {
-      if (typeof hash.slideshow === 'string') {
-        let slideId = hash.slideshow;
+      if (typeof hash.slide === 'string') {
+        let slideId = hash.slide;
         if (slideId) {
           parseInt(slideId);
         }

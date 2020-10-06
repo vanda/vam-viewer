@@ -7,8 +7,8 @@
     "lib"
   ],
   "git repository": "https://github.com/digirati-co-uk/vam-viewer",
-  "module": "dist/umd/@digirati/vam-viewer.js",
-  "main": "lib/index.js",
+  "main": "dist/umd/@digirati/vam-viewer.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "Stephen Fraser <stephen.fraser@digirati.com>",
   "scripts": {
