@@ -104,10 +104,15 @@ const SlideShow: React.FC<SlideShowProps> = ({
                           manifest={manifest}
                           // @ts-ignore
                           previousRange={previousRange}
+                          // @ts-ignore
                           nextRange={nextRange}
+                          // @ts-ignore
                           fullscreenProps={fullscreenProps}
+                          // @ts-ignore
                           exitFullscreen={setIsMobileFullScreen}
+                          // @ts-ignore
                           canvas={canvas}
+                          // @ts-ignore
                           manifestUri={manifestUri}
                           // @ts-ignore
                           {...rangeProps}
