@@ -148,14 +148,13 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           .element('viewport')
           .modifiers({ interactive: isInteractive || !isZoomedOut })}
       >
+        <FullscreenButton {...fullscreenProps} />
         {embeddedTour ? (
           <>
-            <FullscreenButton {...fullscreenProps} />
             <PatchworkEmbed canvas={canvas} fitContainer={true} {...props} />
           </>
         ) : (
           <>
-            <FullscreenButton {...fullscreenProps} />
             <YoutubeVideoSource />
             <SingleTileSource
               // @ts-ignore
