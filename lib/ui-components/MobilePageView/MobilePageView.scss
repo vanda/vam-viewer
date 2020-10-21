@@ -1,0 +1,54 @@
+.mobile-page-view {
+  display: flex;
+  overflow-y: scroll;
+  scroll-snap-points-x: repeat(320px);
+  scroll-snap-destination: 0 0;
+  scroll-snap-type: x mandatory;
+  scroll-snap-type: mandatory;
+
+  &__canvas {
+    scroll-snap-align: start;
+    background: #fff;
+    min-width: 100vw;
+  }
+
+  &__detail {
+    padding: 10px 20px;
+
+    &-label {
+      margin: 10px 0;
+    }
+
+    &-body {
+      font-size: 1.1em;
+      line-height: 1.5;
+    }
+  }
+
+  &__metadata {
+    position: relative;
+  }
+
+  &__attribution {
+    background-color: rgba(0,0,0,.5);
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 10000;
+    text-shadow: 1px 1px 1px #1d1e20;
+    line-height: 1.4;
+    color: white;
+    text-align: center;
+    padding: 0.8em;
+
+    & * {
+      line-height: 1.4;
+      color: white;
+    }
+  }
+
+  &__canvas-image {
+    position: relative;
+    max-width: 100%;
+  }
+}

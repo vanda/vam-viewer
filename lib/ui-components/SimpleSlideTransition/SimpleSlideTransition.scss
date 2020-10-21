@@ -1,0 +1,38 @@
+.slide-transitions {
+  width: 100%;
+  height: 100%;
+}
+
+.fade-enter {
+  .slide__viewport {
+    opacity: 0.01;
+  }
+
+  .slide .slide__overlay-content > * {
+    opacity: 0;
+  }
+}
+
+.fade-enter-active {
+  .slide__viewport {
+    opacity: 1;
+    transition: opacity 500ms ease-in-out;
+  }
+  .slide .slide__overlay-content > * {
+    transition: opacity .5s ease-in-out;
+    opacity: 1;
+  }
+}
+
+.fade-exit {
+  .slide__viewport {
+    opacity: 1;
+  }
+}
+
+.fade-exit-active {
+  .slide__viewport {
+    opacity: 0.01;
+    transition: opacity 500ms ease-in-out;
+  }
+}
