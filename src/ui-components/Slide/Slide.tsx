@@ -72,7 +72,7 @@ const Slide: React.FC<SlideProps> = ({
   return (
     <div
       className={bem.modifiers(
-        behaviors.reduce((acc: any, next: any) => {
+        behaviors.filter((b:any) => b !== 'embedded-tour').reduce((acc: any, next: any) => {
           acc[next] = true;
           return acc;
         }, {})

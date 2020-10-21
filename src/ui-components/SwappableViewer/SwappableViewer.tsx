@@ -13,11 +13,7 @@ import { YoutubeVideoSource } from '../YoutubeVideoSource/YoutubeVideoSource';
 import { PatchworkEmbed } from '../../example-stories/PatchworkEmbed/PatchworkEmbed';
 
 function getEmbeddedAnnotations(canvas: any) {
-
-  // SOMETIMES ANNOTATIONS ARE IN 'ITEMS' AND NOT 'ANNOTATIONS',
-  // I DO NOT UNDERSTAND WHY
-
-  return (canvas.__jsonld.annotations || canvas.__jsonld.items || []).reduce((list: any, next: any) => {
+  return (canvas.__jsonld.annotations || []).reduce((list: any, next: any) => {
     if (next.type === 'AnnotationPage') {
       return (next.items || []).reduce((innerList: any, annotation: any) => {
         innerList.push(annotation);
@@ -141,9 +137,12 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     // }
   };
 
+  const describers = getEmbeddedAnnotations(canvas).filter(
+    (object: any) => object.motivation === 'describing'
+  );
+
   return (
     <>
-      <FullscreenButton {...fullscreenProps} />
       <div
         className={bem
           .element('viewport')
@@ -156,6 +155,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           </>
         ) : (
           <>
+            <FullscreenButton {...fullscreenProps} />
             <YoutubeVideoSource />
             <SingleTileSource
               // @ts-ignore
