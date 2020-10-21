@@ -14,6 +14,6 @@ interface SwappableViewerProps {
     bem: any;
     manifestUri: string;
 }
-declare const _default: React.FC<Pick<SwappableViewerProps, "isInteractive" | "canvas" | "manifest" | "fullscreenProps" | "region" | "manifestUri">>;
+declare const _default: React.FC<Pick<SwappableViewerProps, "canvas" | "isInteractive" | "manifest" | "fullscreenProps" | "region" | "manifestUri">>;
 export default _default;
 //# sourceMappingURL=SwappableViewer.d.ts.map

@@ -10,6 +10,6 @@ interface SlideShowProps {
     renderPanel?: () => void;
     bem: any;
 }
-declare const _default: React.FC<Pick<SlideShowProps, "manifestUri" | "mobileBreakPoint" | "backgroundColor" | "addressable" | "id" | "jsonLd" | "renderPanel">>;
+declare const _default: React.FC<Pick<SlideShowProps, "addressable" | "id" | "manifestUri" | "renderPanel" | "backgroundColor" | "mobileBreakPoint" | "jsonLd">>;
 export default _default;
 //# sourceMappingURL=SlideShow.d.ts.map
