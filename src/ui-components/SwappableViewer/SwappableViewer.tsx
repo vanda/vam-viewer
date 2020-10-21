@@ -13,7 +13,11 @@ import { YoutubeVideoSource } from '../YoutubeVideoSource/YoutubeVideoSource';
 import { PatchworkEmbed } from '../../example-stories/PatchworkEmbed/PatchworkEmbed';
 
 function getEmbeddedAnnotations(canvas: any) {
-  return (canvas.__jsonld.annotations || []).reduce((list: any, next: any) => {
+
+  // SOMETIMES ANNOTATIONS ARE IN 'ITEMS' AND NOT 'ANNOTATIONS',
+  // I DO NOT UNDERSTAND WHY
+
+  return (canvas.__jsonld.annotations || canvas.__jsonld.items || []).reduce((list: any, next: any) => {
     if (next.type === 'AnnotationPage') {
       return (next.items || []).reduce((innerList: any, annotation: any) => {
         innerList.push(annotation);
@@ -98,6 +102,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     const describers = getEmbeddedAnnotations(canvas).filter(
       (object: any) => object.motivation === 'describing'
     );
+
     setEmbeddedTour(
       (canvas &&
         canvas.__jsonld &&
@@ -144,7 +149,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           .element('viewport')
           .modifiers({ interactive: isInteractive || !isZoomedOut })}
       >
-        {embeddedTour ? (
+        {setEmbeddedTour ? (
           <>
             <FullscreenButton {...fullscreenProps} />
             <PatchworkEmbed canvas={canvas} fitContainer={true} {...props} />

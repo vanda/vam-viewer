@@ -39,6 +39,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
   renderPanel,
   bem,
 }) => {
+
   const [innerWidth, setInnerWidth] = useState(0);
   const [qualifiesForMobile, setQualifiesForMobile] = useState(false);
   const [isMobileFullScreen, setIsMobileFullScreen] = useState(false);
