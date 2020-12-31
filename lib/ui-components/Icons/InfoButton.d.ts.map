@@ -1,1 +1,0 @@
-{"version":3,"file":"InfoButton.d.ts","sourceRoot":"","sources":["../../../src/ui-components/Icons/InfoButton.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAC;AAE1B,UAAU,eAAe;IACvB,GAAG,EAAE,GAAG,CAAC;IACT,OAAO,CAAC,EAAE,CAAC,IAAI,EAAE,GAAG,KAAK,IAAI,CAAC;IAC9B,MAAM,CAAC,EAAE,OAAO,CAAC;CAClB;AA2BD,eAAO,MAAM,UAAU,EAAE,KAAK,CAAC,EAAE,CAAC,eAAe,CAQhD,CAAC"}

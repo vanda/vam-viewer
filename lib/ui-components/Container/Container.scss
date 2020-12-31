@@ -1,9 +1,0 @@
-.full-page-container {
-  z-index: 1000;
-  position: relative;
-  pointer-events: visible;
-
-  &--disabled {
-    pointer-events: none;
-  }
-}
