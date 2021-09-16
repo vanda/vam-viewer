@@ -36,12 +36,12 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   parentInFocus = false,
 }) => {
   const goToSlide = (index: number | string) => {
-    index = index + '';
     if (addressable) {
       const qParam = queryString.parse(window.location.hash);
       if (
         qParam.slideshow &&
         Array.isArray(qParam.slideshow) &&
+        (typeof qParam.slideshow !== 'string') &&
         qParam.slide &&
         Array.isArray(qParam.slide)
       ) {
@@ -52,8 +52,7 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
         }
       } else {
         if (typeof qParam.slideshow === 'string' && parseInt(qParam.slideshow) !== id) {
-          document.location.hash =
-            document.location.hash + `&${buildId(currentIndex)}`;
+          document.location.hash =`#${buildId(currentIndex)}`;
         } else {
           document.location.hash = `#${buildId(currentIndex)}`;
         }
@@ -67,10 +66,12 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
 
   const getSlideByID = () => {
     const qParam = queryString.parse(window.location.hash);
+
     let slideshow: any;
     if (
       qParam.slideshow &&
       Array.isArray(qParam.slideshow) &&
+      (typeof qParam.slideshow !== 'string') && // a string is also an array...
       qParam.slide &&
       Array.isArray(qParam.slide)
     ) {
