@@ -48,13 +48,13 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
         const indexOfQueryId = qParam.slideshow.find(query => parseInt(query) === id);
         if (indexOfQueryId) {
           qParam.slide[parseInt(indexOfQueryId)] = currentIndex + '';
-          document.location.hash = queryString.stringify(qParam);
+          history.replaceState('', '', `#${queryString.stringify(qParam)}`);
         }
       } else {
         if (typeof qParam.slideshow === 'string' && parseInt(qParam.slideshow) !== id) {
-          document.location.hash =`#${buildId(currentIndex)}`;
+          history.replaceState('', '', `#${buildId(currentIndex)}`);
         } else {
-          document.location.hash = `#${buildId(currentIndex)}`;
+          history.replaceState('', '', `#${buildId(currentIndex)}`);
         }
       }
     }

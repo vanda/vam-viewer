@@ -123,12 +123,12 @@ const Slide: React.FC<SlideProps> = ({
                   {
                     isNotBlank ? (<div className={bem.element('overlay-content')}>
                         {
-                          (label && label.props.children[0] && label.props.children[0].value.length) && (
+                          (label && label.props.children[0] && !!label.props.children[0].value.length) && (
                             <h3 className={bem.element('title')}>{label}</h3>
                           )
                         }
                         {
-                          (body && body.props.children.en[0] && body.props.children.en.length) && (
+                          (body && body.props.children.en[0] && !!body.props.children.en.length) && (
                             <p className={bem.element('text')}>{body}</p>
                           ) 
                         }
