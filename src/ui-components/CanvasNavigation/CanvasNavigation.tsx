@@ -36,53 +36,54 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   parentInFocus = false,
 }) => {
   const goToSlide = (index: number | string) => {
-    index = index + '';
     if (addressable) {
       const qParam = queryString.parse(window.location.hash);
       if (
-        qParam.id &&
-        Array.isArray(qParam.id) &&
         qParam.slideshow &&
-        Array.isArray(qParam.slideshow)
+        Array.isArray(qParam.slideshow) &&
+        (typeof qParam.slideshow !== 'string') &&
+        qParam.slide &&
+        Array.isArray(qParam.slide)
       ) {
-        const indexOfQueryId = qParam.id.find(query => parseInt(query) === id);
+        const indexOfQueryId = qParam.slideshow.find(query => parseInt(query) === id);
         if (indexOfQueryId) {
-          qParam.slideshow[parseInt(indexOfQueryId)] = currentIndex + '';
-          document.location.hash = queryString.stringify(qParam);
+          qParam.slide[parseInt(indexOfQueryId)] = currentIndex + '';
+          history.replaceState('', '', `#${queryString.stringify(qParam)}`);
         }
       } else {
-        if (typeof qParam.id === 'string' && parseInt(qParam.id) !== id) {
-          document.location.hash =
-            document.location.hash + `&${buildId(currentIndex)}`;
+        if (typeof qParam.slideshow === 'string' && parseInt(qParam.slideshow) !== id) {
+          history.replaceState('', '', `#${buildId(currentIndex)}`);
         } else {
-          document.location.hash = `#${buildId(currentIndex)}`;
+          history.replaceState('', '', `#${buildId(currentIndex)}`);
         }
       }
     }
   };
 
   const buildId = (index: number | string) => {
-    return `id=${id}&slideshow=${index}`;
+    return `slideshow=${id}&slide=${index}`;
   };
 
   const getSlideByID = () => {
     const qParam = queryString.parse(window.location.hash);
+
     let slideshow: any;
     if (
-      qParam.id &&
-      Array.isArray(qParam.id) &&
       qParam.slideshow &&
-      Array.isArray(qParam.slideshow)
+      Array.isArray(qParam.slideshow) &&
+      (typeof qParam.slideshow !== 'string') && // a string is also an array...
+      qParam.slide &&
+      Array.isArray(qParam.slide)
     ) {
-      const indexOfQueryId = qParam.id.find(
+      const indexOfQueryId = qParam.slideshow.find(
         (query: string) => parseInt(query) === id
       );
       if (indexOfQueryId)
-        slideshow = qParam.slideshow[parseInt(indexOfQueryId)];
+        slideshow = qParam.slide[parseInt(indexOfQueryId)];
       if (!slideshow || slideshow < 0 || slideshow >= canvasList.length)
         slideshow = '0';
     } else {
-      slideshow = qParam.slideshow;
+      slideshow = qParam.slide;
     }
     if (!slideshow) slideshow = '0';
     return parseInt(slideshow);
@@ -90,8 +91,8 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
 
   useEffect(() => {
     if (addressable && hash) {
-      if (typeof hash.slideshow === 'string') {
-        let slideId = hash.slideshow;
+      if (typeof hash.slide === 'string') {
+        let slideId = hash.slide;
         if (slideId) {
           parseInt(slideId);
         }

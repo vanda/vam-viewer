@@ -72,7 +72,7 @@ const Slide: React.FC<SlideProps> = ({
   return (
     <div
       className={bem.modifiers(
-        behaviors.reduce((acc: any, next: any) => {
+        behaviors.filter((b:any) => b !== 'embedded-tour').reduce((acc: any, next: any) => {
           acc[next] = true;
           return acc;
         }, {})
@@ -103,33 +103,48 @@ const Slide: React.FC<SlideProps> = ({
           {(
             // @ts-ignore
             { label, body, attributionLabel, attribution }
-          ) =>
-            mobile ? (
-              <>
-                {open ? renderInfoPanel(label, attribution, body) : <></>}
-                <InfoButton bem={bem} onClick={setOpen} />
-              </>
-            ) : (
-              <div
-                className={bem
-                  .element('overlay')
-                  .modifiers({ isMobile: mobile })}
-              >
-                <div className={bem.element('overlay-content')}>
-                  {label ? (
-                    <h3 className={bem.element('title')}>{label}</h3>
-                  ) : null}
-                  {body ? <p className={bem.element('text')}>{body}</p> : null}
+          ) => {
+
+            const isNotBlank = (label && label.props.children[0] && label.props.children[0].value.length) ||
+              (body && body.props.children.en[0] && body.props.children.en.length);
+
+            return (
+              mobile ? (
+                <>
+                  {open ? renderInfoPanel(label, attribution, body) : <></>}
+                  <InfoButton bem={bem} onClick={setOpen} />
+                </>
+              ) : (
+                <div
+                  className={bem
+                    .element('overlay')
+                    .modifiers({ isMobile: mobile })}
+                >
+                  {
+                    isNotBlank ? (<div className={bem.element('overlay-content')}>
+                        {
+                          (label && label.props.children[0] && !!label.props.children[0].value.length) && (
+                            <h3 className={bem.element('title')}>{label}</h3>
+                          )
+                        }
+                        {
+                          (body && body.props.children.en[0] && !!body.props.children.en.length) && (
+                            <p className={bem.element('text')}>{body}</p>
+                          ) 
+                        }
+                    </div>) : null
+                  }
+                  <div className={bem.element('overlay-floating')}>
+                    <p className={bem.element('required-statement')}>
+                      {attributionLabel}
+                      {attribution}
+                    </p>
+                  </div>
                 </div>
-                <div className={bem.element('overlay-floating')}>
-                  <p className={bem.element('required-statement')}>
-                    {attributionLabel}
-                    {attribution}
-                  </p>
-                </div>
-              </div>
+              )
             )
-          }
+
+          }}
         </CanvasDetail>
       )}
     </div>
